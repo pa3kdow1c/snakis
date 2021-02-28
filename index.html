@@ -44,8 +44,9 @@
 
         //game
         let gameIsRunning = true;
-        const fps = 10 ;
-         const tileSize = 60;
+        let WallKillSnake = false;
+        const fps = 15 ;
+        const tileSize = 60;
         const tileCountX = canvas.height/tileSize;
         const tileCountY = canvas.width/tileSize;
  
@@ -90,15 +91,19 @@
             //wall collision
             if (snakePosX > canvas.width - tileSize) {
                 snakePosX = 0;
+                throughWall()
             }
             if (snakePosX < 0) {
                 snakePosX = canvas.width;
+                throughWall()
             }
             if (snakePosY > canvas.height - tileSize) {
                 snakePosY = 0;
+                throughWall()
             }
             if (snakePosY < 0) {
                 snakePosY = canvas.height;
+                throughWall()
             }
             //game over
             tail.forEach(( snakePart) =>{
@@ -176,6 +181,14 @@
 				gameIsRunning = false;
         
         }
+
+        //throughWall
+        function throughWall(){
+            if(WallKillSnake === true ) {
+                gameOver()
+            }
+        }
+
         // keyboard
         function keypush(event){
             switch(event.key){
