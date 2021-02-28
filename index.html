@@ -50,6 +50,7 @@
         //game
         let gameIsRunning = true;
         let WallKillSnake = true;
+        let showTile = true;
         const fps = 15 ;
         const tileSize = 60;
         const tileCountX = canvas.height/tileSize;
@@ -234,7 +235,12 @@
         function drawGrid(){
             for( let i = 0; i < tileCountX; i++){
                     for( let j = 0; j < tileCountY; j++){
-                    rectagele('#fff', tileSize * i ,tileSize * j ,tileSize - 1, tileSize - 1 )
+                        if (showTile === true){
+                            rectagele('#fff', tileSize * i ,tileSize * j ,tileSize - 1, tileSize - 1 )
+                        }
+                        else{
+                            rectagele('#fff', tileSize * i ,tileSize * j ,tileSize, tileSize)
+                        }
                     }
                 }
         }
