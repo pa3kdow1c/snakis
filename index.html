@@ -26,6 +26,9 @@
             display: inline-block;
             margin: 0.0.25em;
         }
+        h2{
+            font-size: 1.5em;
+        }
     </style>
 </head>
     <body>
@@ -33,6 +36,7 @@
             
         </canvas>
         <h1>0</h1>
+        <h2> </h2>
     </body>
     <script>
         //listeners
@@ -40,11 +44,12 @@
         //canvas
         const canvas = document.querySelector('canvas');
         const title = document.querySelector('h1');
+        const restart = document.querySelector('h2');
         const ctx = canvas.getContext("2d");
 
         //game
         let gameIsRunning = true;
-        let WallKillSnake = false;
+        let WallKillSnake = true;
         const fps = 15 ;
         const tileSize = 60;
         const tileCountX = canvas.height/tileSize;
@@ -178,6 +183,7 @@
         //gameOver
         function gameOver() {
 				title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
+				restart.innerHTML = `--- press any key to restart ---`;
 				gameIsRunning = false;
         
         }
