@@ -50,6 +50,15 @@
         <a href="settings.html"> </a>
     </body>
     <script>
+        //game_rules
+            let gameIsRunning = true;
+            let WallKillSnake
+            let showTile = true;
+            const fps = 10 ;
+            const tileSize = 60;
+            let score = 0;
+            let snakeLength = 4;
+
         //listeners
         document.addEventListener('keydown',keypush);
         //canvas
@@ -59,7 +68,7 @@
         const settings = document.querySelector('a');
         const ctx = canvas.getContext("2d");
 
-        //game
+        //tile
         const tileCountX = canvas.height/tileSize;
         const tileCountY = canvas.width/tileSize;
         

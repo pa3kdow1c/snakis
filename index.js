@@ -1,23 +1,27 @@
-// var submit = document.getElementById("play");s
+//websocket
+const http = require("http");
+const WebSocketServer = require("websocket").server
+let connection = null;
 
-let gameIsRunning = true;
-let WallKillSnake
-let showTile = true;
-const fps = 10 ;
-const tileSize = 60;
-let score = 0;
-let snakeLength = 4;
+const httpserver = http.createServer((req, res) => 
+                console.log("we have received a request"))
 
-// submit.onclick = function(){
-//     const ul = document.querySelectorAll(".ul");
-//         for (var i = 0; i < ul.length; i++) {
-//             const checkbox = ul[i].querySelectorAll(".checkbox_info");
-//             if (checkbox[0].checked === true){
-//                 WallKillSnake = true;
-//             }
-//             else {
-//                 WallKillSnake = false
-//             }
-//             console.log(WallKillSnake)
-//         }
-// }
+const websocket = new WebSocketServer({
+    "httpServer": httpserver
+})
+
+httpserver.listen(8080, () => console.log("my server is listening on port 8080"))
+
+
+//communication
+websocket.on("request", request=> {
+
+    connection = request.accept(null, request.origin)
+    connection.on("open", () => console.log("Opened!!!"))
+    connection.on("close", () => console.log("CLOSED!!!"))
+    connection.on("message", message => {
+
+        console.log(`Received message ${message.utf8Data}`)
+        
+    })
+})
