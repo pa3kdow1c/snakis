@@ -9,10 +9,12 @@ submit.onclick = function(){
         for (var i = 0; i < ul.length; i++) {
             const checkbox = ul[i].querySelectorAll(".checkbox_info");
             if (checkbox[0].checked === true){
-                ws.send(`${WallKillSnake = true}`)
+                WallKillSnake = true
+                ws.send(`${WallKillSnake}`)
             }
             else {
-                ws.send(`${WallKillSnake = false}`)
+                WallKillSnake = false
+                ws.send(`${WallKillSnake}`)
             }
             console.log(WallKillSnake)
         }
