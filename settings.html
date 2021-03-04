@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.html"></script>
     <title>Snake</title>
     <style>
         section {
@@ -18,31 +17,10 @@
         body{
             background: #ffbf00 ; 
         }
-        div{
-            font-size: 3rem;
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 2rem;
-        }
         ul{
             margin: 0;
             padding: 0;
             text-align: center;
-        }
-        ul h1 {
-            text-align: center;
-            padding: 0;
-            font-size: 2rem;
-            margin: 0;
-        }
-        ul h2{
-            display: inline-block;
-            margin: 1rem 1.5rem;
-            font-size: 1.5rem;
-        }
-        ul h3{
-            display: inline-block;
-            margin: 0 1rem;
         }
         ul a{
             font-size: 4rem;
@@ -67,41 +45,13 @@
 </head>
     <body>
         <section>        
-            <div>Settings</div>
-            <ul>
-                <h1>difficulty</h1>
-                <h2>easy</h2>
-                <h2>normal</h2>
-                <h2>hard</h2>
-                <h2>insane</h2>
-                <h3>  </h3>
-            </ul>        
-            <ul>
-                <h1>field</h1>
-                <h2>small</h2>
-                <h2>normal</h2>
-                <h2>large</h2>
-                <h3>  </h3>
-            </ul>
-            <ul>
-                <h1 style="margin-bottom: 0.5rem;">color</h1>
-                <h2 style="display: block;margin: 0;">head</h2>
-                <h3>black</h3>
-                <h3>blue</h3>
-                <h3>green</h3>
-                <h3>red</h3>
-                <h2 style="display: block;margin: 0;">tail</h2>
-                <h3>gray</h3>
-                <h3>brown</h3>
-                <h3>orange</h3>
-                <h3>yellow</h3>
+            <ul class="ul">
+                <input type="checkbox" id="cb"   class="checkbox_info">
             </ul>
             <ul style="margin-top: 5rem;">
-                <a href="index.html">PLAY</a>
+                <a id="play" href="index.html">PLAY</a>
             </ul>
         </section>
+        <script src="index.js"></script>
     </body>
-    <script>
-        alert(gameIsRunning)
-    </script>
 </html>

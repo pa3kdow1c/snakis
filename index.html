@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
     <title>Snake</title>
     <style>
         body{
@@ -29,6 +30,15 @@
         h2{
             font-size: 1.5em;
         }
+        a{
+            font-size: 2rem;
+            color: black;
+        }
+        a:hover,
+        a:active,
+        a:focus{
+            color: red;
+        }
     </style>
 </head>
     <body>
@@ -37,6 +47,7 @@
         </canvas>
         <h1>0</h1>
         <h2> </h2>
+        <a href="settings.html"> </a>
     </body>
     <script>
         //listeners
@@ -45,18 +56,12 @@
         const canvas = document.querySelector('canvas');
         const title = document.querySelector('h1');
         const restart = document.querySelector('h2');
+        const settings = document.querySelector('a');
         const ctx = canvas.getContext("2d");
 
         //game
-        let gameIsRunning = true;
-        let WallKillSnake = true;
-        let showTile = true;
-        const fps = 15 ;
-        const tileSize = 60;
         const tileCountX = canvas.height/tileSize;
         const tileCountY = canvas.width/tileSize;
- 
-        let score = 0;
         
         //colors
         const colorHead = 'black'   //black
@@ -71,7 +76,6 @@
         let velocityY = 0;
 
         let tail = [];
-        let snakeLength = 4;
 
         //food
         let foodPosX = 0;
@@ -185,6 +189,7 @@
         function gameOver() {
 				title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
 				restart.innerHTML = `--- press any key to restart ---`;
+				settings.innerHTML = `settings`;
 				gameIsRunning = false;
         
         }
