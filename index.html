@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
     <style>
+        /* main */
         body{
             background:#ffbf00 ;
             text-align: center;
+            margin: 1rem;
+        }
+        section {
+            margin: auto;
+            border: 10px solid #f7347a;
+            padding: 0;
+            width: 600px;
+            height: 600px;
+            background: white;
+
         }
         canvas{
             border: 10px solid #f7347a;
@@ -29,265 +40,534 @@
         h2{
             font-size: 1.5em;
         }
+
+        /* difficulty */
+        .ul[name="difficulty"]{
+            margin: 10px ;
+            padding: 0;
+        }
+        .ul[name="difficulty"] input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+            }
+
+        .ul[name="difficulty"] label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .ul[name="difficulty"] label:hover {
+            background-color: #cacaca;
+            border: 2px solid #cacaca;
+            }
+
+
+
+        .ul[name="difficulty"] input[id="easy_difficulty"]:checked + label {
+            background-color: #fad42c;
+            border: solid 2px #fad42c;
+        }
+        .ul[name="difficulty"] input[id="normal_difficulty"]:checked + label {
+            background-color: #ff8d0b;
+            border: solid 2px #ff8d0b ;
+        }
+        .ul[name="difficulty"] input[id="hard_difficulty"]:checked + label {
+            background-color: #d61717;
+            border: solid 2px #d61717;
+        }
+        .ul[name="difficulty"] input[id="insane_difficulty"]:checked + label {
+            background-color: #a81cbb;
+            border: solid 2px #a81cbb;
+        }
+
+        /* field */
+        .ul[name="field"]{
+            margin: 10px ;
+            padding: 0;
+        }
+        .ul[name="field"] input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+            }
+
+        .ul[name="field"] label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .ul[name="field"] label:hover {
+            background-color: #cacaca;
+            border: 2px solid #cacaca;
+            }
+
+        .ul[name="field"] input[id="small_field"]:checked + label {
+            background-color: #808080;
+            border: solid 2px #808080;
+        }
+        .ul[name="field"] input[id="normal_field"]:checked + label {
+            background-color: #808080;
+            border: solid 2px #808080 ;
+        }
+        .ul[name="field"] input[id="large_field"]:checked + label {
+            background-color:  #808080;
+            border: solid 2px #808080;
+        }
+        /* colorOfHead */
+        .ul[name="colorOfHead"]{
+            margin: 10px ;
+            padding: 0;
+        }
+        .ul[name="colorOfHead"] input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+            }
+
+        .ul[name="colorOfHead"] label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .ul[name="colorOfHead"] label:hover {
+            background-color: #cacaca;
+            border: 2px solid #cacaca;
+            }
+
+        .ul[name="colorOfHead"] input[id="blue_colorOfHead"]:checked + label {
+            background-color: blue;
+            border: solid 2px blue;
+            color: white;
+        }
+        .ul[name="colorOfHead"] input[id="red_colorOfHead"]:checked + label {
+            background-color: red;
+            border: solid 2px  red;
+            color: white;
+        }
+        .ul[name="colorOfHead"] input[id="yellow_colorOfHead"]:checked + label {
+            background-color:  yellow;
+            border: solid 2px yellow;
+            color: black;
+        }
+        .ul[name="colorOfHead"] input[id="gray_colorOfHead"]:checked + label {
+            background-color: gray ;
+            border: solid 2px gray;
+            color: white;
+        }
+        .ul[name="colorOfHead"] input[id="black_colorOfHead"]:checked + label {
+            background-color:  black;
+            border: solid 2px black;
+            color: white;
+        }
+        .ul[name="colorOfHead"] input[id="orange_colorOfHead"]:checked + label {
+            background-color: orange;
+            border: solid 2px orange;
+            color: white;
+        }
+        /* colorOfTail */
+        .ul[name="colorOfTail"]{
+            margin: 10px ;
+            padding: 0;
+        }
+        .ul[name="colorOfTail"] input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+            }
+
+        .ul[name="colorOfTail"] label {
+            display: inline-block;
+            background-color: #ddd;
+            padding: 10px 20px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .ul[name="colorOfTail"] label:hover {
+            background-color: #cacaca;
+            border: 2px solid #cacaca;
+            }
+
+        .ul[name="colorOfTail"] input[id="blue_colorOfTail"]:checked + label {
+            background-color: blue;
+            border: solid 2px blue;
+            color: white;
+        }
+        .ul[name="colorOfTail"] input[id="red_colorOfTail"]:checked + label {
+            background-color: red;
+            border: solid 2px  red;
+            color: white;
+        }
+        .ul[name="colorOfTail"] input[id="yellow_colorOfTail"]:checked + label {
+            background-color:  yellow;
+            border: solid 2px yellow;
+            color: black;
+        }
+        .ul[name="colorOfTail"] input[id="gray_colorOfTail"]:checked + label {
+            background-color: gray ;
+            border: solid 2px gray;
+            color: white;
+        }
+        .ul[name="colorOfTail"] input[id="black_colorOfTail"]:checked + label {
+            background-color:  black;
+            border: solid 2px black;
+            color: white;
+        }
+        .ul[name="colorOfTail"] input[id="orange_colorOfTail"]:checked + label {
+            background-color: orange;
+            border: solid 2px orange;
+            color: white;
+        }
     </style>
 </head>
     <body>
-        <canvas width="600px" height="600px">
-            
-        </canvas>
+        <section id="section" >        
+            <ul class="ul" name="difficulty">
+                <div style="margin-bottom: 10px;">Difficulty</div>
+                <input type="radio" id="easy_difficulty"    class="radio_difficulty" name="difficulty_item" value="easy">
+                <label for="easy_difficulty">easy</label>
+                <input type="radio" id="normal_difficulty"  class="radio_difficulty" name="difficulty_item" value="normal" checked>
+                <label for="normal_difficulty">normal</label>
+                <input type="radio" id="hard_difficulty"    class="radio_difficulty" name="difficulty_item" value="hard">
+                <label for="hard_difficulty">hard</label>
+                <input type="radio" id="insane_difficulty"  class="radio_difficulty" name="difficulty_item" value="insane">
+                <label for="insane_difficulty">insane</label>
+            </ul>
+            <ul  class="ul" name="field">
+                <div style="margin-bottom: 10px;">Field</div>
+                <input type="radio" id="small_field"    class="radio_field" name="field_item" value="small">
+                <label for="small_field">small</label>
+                <input type="radio" id="normal_field"   class="radio_field" name="field_item" value="normal" checked>
+                <label for="normal_field">normal</label>
+                <input type="radio" id="large_field"    class="radio_field" name="field_item" value="large">
+                <label for="large_field">large</label>
+            </ul>
+            <ul  class="ul" name="colorOfHead">
+                <div>Color of head</div>
+                <input type="radio" id="blue_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="blue">
+                <label for="blue_colorOfHead">blue</label>
+                <input type="radio" id="red_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="red" >
+                <label for="red_colorOfHead">red</label>
+                <input type="radio" id="yellow_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="yellow">
+                <label for="yellow_colorOfHead">yellow</label>
+                <input type="radio" id="gray_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="gray">
+                <label for="gray_colorOfHead">gray</label>
+                <input type="radio" id="black_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="black" checked>
+                <label for="black_colorOfHead">black</label>
+                <input type="radio" id="orange_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="orange">
+                <label for="orange_colorOfHead">orange</label>
+            </ul>
+            <ul  class="ul" name="colorOfTail">
+                <div>Color of Tail</div>
+                <input type="radio" id="blue_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="blue">
+                <label for="blue_colorOfTail">blue</label>
+                <input type="radio" id="red_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="red" >
+                <label for="red_colorOfTail">red</label>
+                <input type="radio" id="yellow_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="yellow">
+                <label for="yellow_colorOfTail">yellow</label>
+                <input type="radio" id="gray_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="gray" checked>
+                <label for="gray_colorOfTail">gray</label>
+                <input type="radio" id="black_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="black" >
+                <label for="black_colorOfTail">black</label>
+                <input type="radio" id="orange_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="orange">
+                <label for="orange_colorOfTail">orange</label>
+            </ul>
+            <ul style="margin-top: 5rem;padding: 0;">
+                <a id="play">PLAY</a>
+            </ul>
+        </section>
+
+        <canvas width="600px" height="600px" style="display: none;"  id="cvs" ></canvas>
+
+
         <h1>0</h1>
         <h2> </h2>
     </body>
     <script>
-        //listeners
-        document.addEventListener('keydown',keypush);
-        //canvas
-        const canvas = document.querySelector('canvas');
-        const title = document.querySelector('h1');
-        const restart = document.querySelector('h2');
-        const ctx = canvas.getContext("2d");
-
-        //game
+        //game_rules
         let gameIsRunning = true;
         let WallKillSnake = true;
         let showTile = true;
-        const fps = 15 ;
-        const tileSize = 60;
-        const tileCountX = canvas.height/tileSize;
-        const tileCountY = canvas.width/tileSize;
- 
+        let fps = 10 ;
+        let tileSize = 60;
         let score = 0;
-        
-        //colors
-        const colorHead = 'black'   //black
-        const colorTail = 'red'  //#555
-  
-        //player
-        let snakesSpeed = tileSize;
-        let snakePosX = 0;
-        let snakePosY = canvas.height  / 2; 
-
-        let velocityX = 1;
-        let velocityY = 0;
-
-        let tail = [];
         let snakeLength = 4;
+        let colorHead = 'black'   //black
+        let colorTail = 'red'  //#555
 
-        //food
-        let foodPosX = 0;
-        let foodPosY = 0;
+        //exchange
+        var submit = document.getElementById("play");
+        submit.onclick = function(){
+            const ul = document.querySelectorAll(".ul");
+                for (var i = 0; i < ul.length; i++) {
 
-        //loop
-        function gameLoop(){
-            if (gameIsRunning ){
-                drawStuff ()
-                moveStuff ()
-                setTimeout(gameLoop, 1000/fps);
-                //requestAnimationFrame(gameLoop);
-            }
-        }
-        resetFood()
-        gameLoop()
+                    //field
+                    if( ul[i].getAttribute("name") === "field"){
+                        const radio_field = ul[i].querySelectorAll(".radio_field")
+                        if (radio_field[0].checked === true){tileSize = 100}
+                        if (radio_field[1].checked === true){tileSize = 60}
+                        if (radio_field[2].checked === true){tileSize = 30}
+                    }
 
-        //move everything
-        function moveStuff (){
-            snakePosX += snakesSpeed * velocityX;
-            snakePosY += snakesSpeed * velocityY;
-
-            //wall collision
-            if (snakePosX > canvas.width - tileSize) {
-                snakePosX = 0;
-                throughWall()
-            }
-            if (snakePosX < 0) {
-                snakePosX = canvas.width;
-                throughWall()
-            }
-            if (snakePosY > canvas.height - tileSize) {
-                snakePosY = 0;
-                throughWall()
-            }
-            if (snakePosY < 0) {
-                snakePosY = canvas.height;
-                throughWall()
-            }
-            //game over
-            tail.forEach(( snakePart) =>{
-                if (snakePosX === snakePart.x && snakePosY === snakePart.y){
-                    gameOver()
+                    //colorOfHead
+                    if( ul[i].getAttribute("name") === "colorOfHead"){
+                        const radio_color = ul[i].querySelectorAll(".radio_HeadColor")
+                        if (radio_color[0].checked === true){colorHead = "blue"}
+                        if (radio_color[1].checked === true){colorHead = "red"}
+                        if (radio_color[2].checked === true){colorHead = "yellow"}
+                        if (radio_color[3].checked === true){colorHead = "gray"}
+                        if (radio_color[4].checked === true){colorHead = "black"}
+                        if (radio_color[5].checked === true){colorHead = "orange"}
+                    }
+                    //colorOfTail
+                    if( ul[i].getAttribute("name") === "colorOfTail"){
+                        const radio_color = ul[i].querySelectorAll(".radio_TailColor")
+                        if (radio_color[0].checked === true){colorTail = "blue"}
+                        if (radio_color[1].checked === true){colorTail = "red"}
+                        if (radio_color[2].checked === true){colorTail = "yellow"}
+                        if (radio_color[3].checked === true){colorTail = "gray"}
+                        if (radio_color[4].checked === true){colorTail = "black"}
+                        if (radio_color[5].checked === true){colorTail = "orange"}
+                    }
+                    //difficulty
+                    if( ul[i].getAttribute("name") === "difficulty"){
+                        const radio_difficulty = ul[i].querySelectorAll(".radio_difficulty")
+                        if (radio_difficulty[0].checked === true){fps = 5}
+                        if (radio_difficulty[1].checked === true){fps = 10}
+                        if (radio_difficulty[2].checked === true){fps = 15}
+                        if (radio_difficulty[3].checked === true){fps = 20}
+                    }
                 }
-            });
-
-            //tail
-            tail.push({x: snakePosX, y:snakePosY})
+            
 
 
-            //food collision
-            if(snakePosX === foodPosX && snakePosY === foodPosY){
-                title.textContent = ++score;
-                snakeLength++;
-                resetFood()
-            }    
+            //change from section to cvs
+            document.getElementById("section").style.display = "none";
+            document.getElementById("cvs").style.display = "initial";
+            startCalculation()
         }
 
+        function startCalculation(){
 
-        // draw everyting
-        function drawStuff(){
-            //background
-            rectagele( '#ffbf00',0,0, canvas.width,canvas.height)
+            //listeners
+            document.addEventListener('keydown',keypush);
+            //canvas
+            const canvas = document.querySelector('canvas');
+            const title = document.querySelector('h1');
+            const restart = document.querySelector('h2');
+            const settings = document.querySelector('a');
+            const ctx = canvas.getContext("2d");
 
-            //grid
-            drawGrid() 
+            //tile
+            const tileCountX = canvas.height/tileSize;
+            const tileCountY = canvas.width/tileSize;
+            
+
+    
+            //player
+            let snakesSpeed = tileSize;
+            let snakePosX = 0;
+            let snakePosY = canvas.height  / 2; 
+
+            let velocityX = 1;
+            let velocityY = 0;
+
+            let tail = [];
 
             //food
-            rectagele('#00bfff', foodPosX,foodPosY,tileSize,tileSize)
+            let foodPosX = 0;
+            let foodPosY = 0;
 
-            //tail
-            tail.forEach((snakePart)=>
-                rectagele(colorTail, snakePart.x,snakePart.y,tileSize,tileSize)
-            )
-
-            //forgot earlier parts fo snake
-            tail = tail.slice(-1 * snakeLength)
-        
-            //snake
-            rectagele(colorHead,snakePosX,snakePosY,tileSize,tileSize)
-
-        //draw rectage;e
-        }
-        function rectagele(color,x,y,width,height){
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, width, height);
-        }
-        
-        //randomize food position
-        function resetFood(){
-            //game over (nowhere to go)
-            if (snakeLength === tileCountX * tileCountY){
-                gameOver()
-            }
-
-            foodPosX = Math.floor(Math.random() * tileCountX) * tileSize
-            foodPosY = Math.floor(Math.random() * tileCountY) * tileSize
-
-            //dont spawn food on snakes head
-            if ( foodPosX === snakePosX && foodPosY === snakePosY){
-                resetFood()
-            }
-
-            //dont spawn food on any snake part
-            if (tail.some(snakePart => snakePart.x === foodPosX && snakePart.y === foodPosY)){
-                resetFood()
-            }
-        }
-        
-        //gameOver
-        function gameOver() {
-				title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
-				restart.innerHTML = `--- press any key to restart ---`;
-				gameIsRunning = false;
-        
-        }
-
-        //throughWall
-        function throughWall(){
-            if(WallKillSnake === true ) {
-                gameOver()
-            }
-        }
-
-        // keyboard
-        function keypush(event){
-            switch(event.key){
-                case 'ArrowLeft':
-                    if (velocityX !== 1) {
-                        velocityX = -1;
-                        velocityY = 0;
-                    }
-                    break;
-                case 'ArrowUp':
-                    if (velocityY !== 1) {
-                        velocityX = 0;
-                        velocityY = -1;
-                    }
-                    break;
-                case 'ArrowRight':
-                    if (velocityX !== -1) {
-                        velocityX = 1;
-                        velocityY = 0;
-                    }
-                    break;
-                case 'ArrowDown':
-                if (velocityY !== -1) {
-                        velocityX = 0;
-                        velocityY = 1;
-                    }
-                    break;
-                default:
-                    //restart game
-                    if ( !gameIsRunning ) location.reload()
-                    break
-
-
-            }
-        }
-
-        function drawGrid(){
-            for( let i = 0; i < tileCountX; i++){
-                    for( let j = 0; j < tileCountY; j++){
-                        if (showTile === true){
-                            rectagele('#fff', tileSize * i ,tileSize * j ,tileSize - 1, tileSize - 1 )
-                        }
-                        else{
-                            rectagele('#fff', tileSize * i ,tileSize * j ,tileSize, tileSize)
-                        }
-                    }
+            //loop
+            function gameLoop(){
+                if (gameIsRunning ){
+                    drawStuff ()
+                    moveStuff ()
+                    setTimeout(gameLoop, 1000/fps);
+                    //requestAnimationFrame(gameLoop);
                 }
+            }
+            resetFood()
+            gameLoop()
+
+            //move everything
+            function moveStuff (){
+                snakePosX += snakesSpeed * velocityX;
+                snakePosY += snakesSpeed * velocityY;
+
+                //wall collision
+                if (snakePosX > canvas.width - tileSize) {
+                    snakePosX = 0;
+                    throughWall()
+                }
+                if (snakePosX < 0) {
+                    snakePosX = canvas.width;
+                    throughWall()
+                }
+                if (snakePosY > canvas.height - tileSize) {
+                    snakePosY = 0;
+                    throughWall()
+                }
+                if (snakePosY < 0) {
+                    snakePosY = canvas.height;
+                    throughWall()
+                }
+                //game over
+                tail.forEach(( snakePart) =>{
+                    if (snakePosX === snakePart.x && snakePosY === snakePart.y){
+                        gameOver()
+                    }
+                });
+
+                //tail
+                tail.push({x: snakePosX, y:snakePosY})
+
+
+                //food collision
+                if(snakePosX === foodPosX && snakePosY === foodPosY){
+                    title.textContent = ++score;
+                    snakeLength++;
+                    resetFood()
+                }    
+            }
+
+
+            // draw everyting
+            function drawStuff(){
+                //background
+                rectagele( '#ffbf00',0,0, canvas.width,canvas.height)
+
+                //grid
+                drawGrid() 
+
+                //food
+                rectagele('#00bfff', foodPosX,foodPosY,tileSize,tileSize)
+
+                //tail
+                tail.forEach((snakePart)=>
+                    rectagele(colorTail, snakePart.x,snakePart.y,tileSize,tileSize)
+                )
+
+                //forgot earlier parts fo snake
+                tail = tail.slice(-1 * snakeLength)
+            
+                //snake
+                rectagele(colorHead,snakePosX,snakePosY,tileSize,tileSize)
+
+            //draw rectage;e
+            }
+            function rectagele(color,x,y,width,height){
+                ctx.fillStyle = color;
+                ctx.fillRect(x, y, width, height);
+            }
+            
+            //randomize food position
+            function resetFood(){
+                //game over (nowhere to go)
+                if (snakeLength === tileCountX * tileCountY){
+                    gameOver()
+                }
+
+                foodPosX = Math.floor(Math.random() * tileCountX) * tileSize
+                foodPosY = Math.floor(Math.random() * tileCountY) * tileSize
+
+                //dont spawn food on snakes head
+                if ( foodPosX === snakePosX && foodPosY === snakePosY){
+                    resetFood()
+                }
+
+                //dont spawn food on any snake part
+                if (tail.some(snakePart => snakePart.x === foodPosX && snakePart.y === foodPosY)){
+                    resetFood()
+                }
+            }
+            
+            //gameOver
+            function gameOver() {
+                    title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
+                    restart.innerHTML = `--- press any key to restart ---`;
+                    gameIsRunning = false;
+            
+            }
+
+            //throughWall
+            function throughWall(){
+                if(WallKillSnake === true ) {
+                    gameOver()
+                }
+            }
+
+            // keyboard
+            function keypush(event){
+                switch(event.key){
+                    case 'ArrowLeft':
+                        if (velocityX !== 1) {
+                            velocityX = -1;
+                            velocityY = 0;
+                        }
+                        break;
+                    case 'ArrowUp':
+                        if (velocityY !== 1) {
+                            velocityX = 0;
+                            velocityY = -1;
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (velocityX !== -1) {
+                            velocityX = 1;
+                            velocityY = 0;
+                        }
+                        break;
+                    case 'ArrowDown':
+                    if (velocityY !== -1) {
+                            velocityX = 0;
+                            velocityY = 1;
+                        }
+                        break;
+                    default:
+                        //restart game
+                        if ( !gameIsRunning ) location.reload()
+                        break
+
+
+                }
+            }
+
+            function drawGrid(){
+                for( let i = 0; i < tileCountX; i++){
+                        for( let j = 0; j < tileCountY; j++){
+                            if (showTile === true){
+                                rectagele('#fff', tileSize * i ,tileSize * j ,tileSize - 1, tileSize - 1 )
+                            }
+                            else{
+                                rectagele('#fff', tileSize * i ,tileSize * j ,tileSize, tileSize)
+                            }
+                        }
+                    }
+            }
         }
     </script>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ctx.lineWidth = 5;
-ctx.strokeStyle = "black";
-ctx.moveTo(300,100);
-ctx.lineTo(400,200);
-ctx.stroke() -->
