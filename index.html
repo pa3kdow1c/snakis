@@ -39,7 +39,23 @@
         }
         h2{
             font-size: 1.5em;
+            font-family: 'Helvetica';
         }
+        h2 b {
+            font: bold 1.5rem;
+            color: red;
+            font-family: 'Helvetica';
+        }
+        h3{
+            font-size: 1.5em;
+            font-family: 'Helvetica';
+        }
+        h3 b {
+            font: bold 1.5rem;
+            color: red;
+            font-family: 'Helvetica';
+        }
+
 
         /* difficulty */
         .ul[name="difficulty"]{
@@ -65,6 +81,7 @@
 
         .ul[name="difficulty"] label:hover {
             background-color: #cacaca;
+
             border: 2px solid #cacaca;
             }
 
@@ -265,7 +282,7 @@
                 <label for="large_field">large</label>
             </ul>
             <ul  class="ul" name="colorOfHead">
-                <div>Color of head</div>
+                <div style="margin-bottom: 10px;">Color of head</div>
                 <input type="radio" id="blue_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="blue">
                 <label for="blue_colorOfHead">blue</label>
                 <input type="radio" id="red_colorOfHead"    class="radio_HeadColor" name="color_head_item" value="red" >
@@ -280,7 +297,7 @@
                 <label for="orange_colorOfHead">orange</label>
             </ul>
             <ul  class="ul" name="colorOfTail">
-                <div>Color of Tail</div>
+                <div style="margin-bottom: 10px;">Color of tail</div>
                 <input type="radio" id="blue_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="blue">
                 <label for="blue_colorOfTail">blue</label>
                 <input type="radio" id="red_colorOfTail"    class="radio_TailColor" name="color_tail_item" value="red" >
@@ -304,6 +321,7 @@
 
         <h1>0</h1>
         <h2> </h2>
+        <h3> </h3>
     </body>
     <script>
         //game_rules
@@ -316,21 +334,19 @@
         let snakeLength = 4;
         let colorHead = 'black'   //black
         let colorTail = 'red'  //#555
-        document.addEventListener('keydown',enter_start);
-        
+
         //exchange
-        function enter_start(event){
-            switch(event.key){
-                case 'Enter':
-                const ul = document.querySelectorAll(".ul");
+        var submit = document.getElementById("play");
+        submit.onclick = function(){
+            const ul = document.querySelectorAll(".ul");
                 for (var i = 0; i < ul.length; i++) {
 
                     //field
                     if( ul[i].getAttribute("name") === "field"){
                         const radio_field = ul[i].querySelectorAll(".radio_field")
-                        if (radio_field[0].checked === true){tileSize = 100}
+                        if (radio_field[0].checked === true){tileSize = 100; if (fps === 5){ fps = fps - 3};if (fps === 10){ fps = fps - 6};if (fps === 15){ fps = fps - 8};if (fps === 20){ fps = fps - 10}}
                         if (radio_field[1].checked === true){tileSize = 60}
-                        if (radio_field[2].checked === true){tileSize = 30}
+                        if (radio_field[2].checked === true){tileSize = 30; fps = fps + 10}
                     }
 
                     //colorOfHead
@@ -369,12 +385,10 @@
             document.getElementById("section").style.display = "none";
             document.getElementById("cvs").style.display = "initial";
             startCalculation()
-                    break;
-
-            }
         }
 
         function startCalculation(){
+
 
             //listeners
             document.addEventListener('keydown',keypush);
@@ -382,7 +396,7 @@
             const canvas = document.querySelector('canvas');
             const title = document.querySelector('h1');
             const restart = document.querySelector('h2');
-            const settings = document.querySelector('a');
+            const settings = document.querySelector('h3');
             const ctx = canvas.getContext("2d");
 
             //tile
@@ -512,7 +526,8 @@
             //gameOver
             function gameOver() {
                     title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
-                    restart.innerHTML = `--- press any key to restart ---`;
+                    restart.innerHTML = `--- press <b>Enter</b> to restart ---`;
+                    settings.innerHTML = `--- press <b>S</b> for settings ---`;
                     gameIsRunning = false;
             
             }
@@ -551,11 +566,30 @@
                             velocityY = 1;
                         }
                         break;
-                    default:
-                        //restart game
-                        // !gameIsRunning location.reload()
-                        if ( !gameIsRunning ) {}
-                        
+                    case 'Enter':
+                        if(gameIsRunning === false){
+                            gameIsRunning = true
+                            snakeLength = 4;
+                            tail = [];
+                            score = 0;
+                            title.innerHTML = `${score}`;
+                            restart.innerHTML = ``;
+                            settings.innerHTML = ``;
+                            startCalculation()
+                        }
+                        break
+                        case 's':
+                        if(gameIsRunning === false){
+                            gameIsRunning = true
+                            snakeLength = 4;
+                            tail = [];
+                            score = 0;
+                            title.innerHTML = `${score}`;
+                            restart.innerHTML = ``;
+                            settings.innerHTML = ``;
+                            document.getElementById("cvs").style.display = "none";
+                            document.getElementById("section").style.display = "initial";
+                        }
                         break
 
 
