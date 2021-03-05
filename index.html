@@ -316,11 +316,13 @@
         let snakeLength = 4;
         let colorHead = 'black'   //black
         let colorTail = 'red'  //#555
-
+        document.addEventListener('keydown',enter_start);
+        
         //exchange
-        var submit = document.getElementById("play");
-        submit.onclick = function(){
-            const ul = document.querySelectorAll(".ul");
+        function enter_start(event){
+            switch(event.key){
+                case 'Enter':
+                const ul = document.querySelectorAll(".ul");
                 for (var i = 0; i < ul.length; i++) {
 
                     //field
@@ -367,6 +369,9 @@
             document.getElementById("section").style.display = "none";
             document.getElementById("cvs").style.display = "initial";
             startCalculation()
+                    break;
+
+            }
         }
 
         function startCalculation(){
