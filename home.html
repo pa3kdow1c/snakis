@@ -58,7 +58,30 @@
             font-family: 'Helvetica';
         }
 
+        h4 {
+            display: inline-block;
+            text-align: left;
+            height: 600px;
+            width: auto;
+            padding: 0;
+            left: 0px;
+            top: 0px;
+            margin: 0;
+            position: absolute;
+        }
 
+        img{
+            width: 50px;
+        }
+
+        h5{
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-family: Helvetica;
+            font-size: 1rem;
+            margin: 0;
+        }
 
         /* difficulty */
         .ul[name="difficulty"]{
@@ -277,9 +300,12 @@
         
     </style>
 </head>
-    <body>
-        <main id="main">
-            <section id="section" >        
+    <body style="position: relative;">
+        <h4>
+            <img id="image" src="images/play.png" style="display: inline-block;"> 
+        </h4>
+        <main id="main" style="display: inline-block; vertical-align: top;">
+            <section id="section" style="display: inline-block;">        
                 <ul class="ul" name="difficulty">
                     <div style="margin-bottom: 10px;">Difficulty</div>
                     <input type="radio" id="easy_difficulty"    class="radio_difficulty" name="difficulty_item" value="easy">
@@ -335,10 +361,9 @@
                 </ul>
             </section>
                     
-        </main>
-
+        </main>    
         <canvas width="600px" height="600px" style="display: none;"  id="cvs" ></canvas>
-
+        <h5>Highest score: 0</h5>
 
         <h1>0</h1>
         <h2> </h2>
@@ -348,6 +373,7 @@
         //game_rules
         let gameIsRunning = true;
         let WallKillSnake = true;
+        let BackgroundMusic = true;
         let showTile = true;
         let fps = 10 ;
         let tileSize = 60;
@@ -356,15 +382,47 @@
         let colorHead = 'black'   //black
         let colorTail = 'red'  //#555
 
-        //sound
 
-        // var Crash_Sound = new Audio("Sound-Effect-Crash.mp3");
+        //canvas
+        const canvas = document.querySelector('canvas');
+        const title = document.querySelector('h1');
+        const restart = document.querySelector('h2');
+        const settings = document.querySelector('h3');
+        const hi_score = document.querySelector('h5')
+        const ctx = canvas.getContext("2d");
+
+        //food
+        let foodPosX = 0;
+        let foodPosY = 0;
+
+        //highest score
+        let HighestScore = 0
+
+        //sound
         var Crash_Sound   = new Audio("music/Punch-Sound-Effect .mp3");
         var LevelUp_Sound = new Audio("music/Level Up - Sound Effects.mp3");
         var Running_Music = new Audio("music/Dream Running Music.mp3");
         Crash_Sound.volume = 0.7;
         LevelUp_Sound.volume = 0.5;
         Running_Music.volume = 0.2;
+
+        //sound_change
+        var s = 1
+        var sound = document.getElementById("image");
+        sound.onclick = function(){
+            if (s === 1){
+                document.getElementById("image").src="images/pause.png"
+                BackgroundMusic = false;
+                s = 0
+            }
+            else {
+                document.getElementById("image").src="images/play.png"
+                BackgroundMusic = true;
+                s = 1
+
+            }
+        }
+
 
 
         
@@ -377,9 +435,9 @@
                     //field
                     if( ul[i].getAttribute("name") === "field"){
                         const radio_field = ul[i].querySelectorAll(".radio_field")
-                        if (radio_field[0].checked === true){tileSize = 100; if (fps === 5){ fps = fps - 3};if (fps === 10){ fps = fps - 6};if (fps === 15){ fps = fps - 8};if (fps === 20){ fps = fps - 10}}
-                        if (radio_field[1].checked === true){tileSize = 60}
-                        if (radio_field[2].checked === true){tileSize = 30; fps = fps + 10}
+                        if (radio_field[0].checked === true){tileSize = 100; if (fps === 5){ fps = fps - 3};if (fps === 10){ fps = fps - 6};if (fps === 15){ fps = fps - 8};if (fps === 20){ fps = fps - 10};{HighestScore = 0;hi_score.innerHTML = `Highest score: ${HighestScore}`}
+                        if (radio_field[1].checked === true){tileSize = 60};HighestScore = 0;hi_score.innerHTML = `Highest score: ${HighestScore}`}
+                        if (radio_field[2].checked === true){tileSize = 30; fps = fps + 10;HighestScore = 0;hi_score.innerHTML = `Highest score: ${HighestScore}`}
                     }
 
                     //colorOfHead
@@ -416,29 +474,21 @@
 
             //change from section to cvs
             document.getElementById("main").style.display = "none";
-            document.getElementById("cvs").style.display = "initial";
-            Running_Music.play()
+            document.getElementById("cvs").style.display = "inline-block";
+
+
             startCalculation()
         }
 
         function startCalculation(){
-
-
             //listeners
             document.addEventListener('keydown',keypush);
-            //canvas
-            const canvas = document.querySelector('canvas');
-            const title = document.querySelector('h1');
-            const restart = document.querySelector('h2');
-            const settings = document.querySelector('h3');
-            const ctx = canvas.getContext("2d");
-
             //tile
             const tileCountX = canvas.height/tileSize;
             const tileCountY = canvas.width/tileSize;
             
 
-    
+
             //player
             let snakesSpeed = tileSize;
             let snakePosX = 0;
@@ -449,13 +499,11 @@
 
             let tail = [];
 
-            //food
-            let foodPosX = 0;
-            let foodPosY = 0;
-
             //loop
             function gameLoop(){
                 if (gameIsRunning ){
+                    if (BackgroundMusic){Running_Music.play()}
+                    else{Running_Music.pause()}
                     drawStuff ()
                     moveStuff ()
                     setTimeout(gameLoop, 1000/fps);
@@ -502,7 +550,10 @@
                 if(snakePosX === foodPosX && snakePosY === foodPosY){
                     title.textContent = ++score;
                     snakeLength++;
-                    LevelUp_Sound.play() 
+                    if (score >= HighestScore) {HighestScore = score}
+                    hi_score.innerHTML = `Highest score: ${HighestScore}`;
+                    if (BackgroundMusic){LevelUp_Sound.play()}
+                    else{LevelUp_Sound.pause()}
                     resetFood()
                 }    
             }
@@ -560,7 +611,8 @@
             
             //gameOver
             function gameOver() {
-                    Crash_Sound.play()
+                    if (BackgroundMusic){Crash_Sound.play()}
+                    else{Crash_Sound.pause()}
                     title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
                     restart.innerHTML = `--- press <b>Enter</b> to restart ---`;
                     settings.innerHTML = `--- press <b>S</b> for settings ---`;
